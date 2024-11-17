@@ -64,31 +64,31 @@ I2C通信时单片机GPIO口必须设置为开漏输出，否则可能会造成�
 
 ### 硬件I2C
 
-STM32CubeMX配置，找到你要用的I2C外设的引脚，并设置引脚功能为SCL和SDA，如下图所示是I2C3的SCL。
+第一步、STM32CubeMX配置I2C
 
-![](https://tc2.zeruns.tech/2024/03/17/image-20240317002450658.png)
+启用对应的I2C外设，速度模式设置为 `Fast Mode`，速度改成 1000，其他默认就行。
 
-接着配置I2C外设，启用对应的I2C外设，速度模式设置为 `Fast Mode Plus`，速度改成 1000，其他默认就行。
+![](https://imgcdn.qlqq.me/2024/11/17/6739774d2b151.png)
 
-![](https://tc2.zeruns.tech/2024/03/17/I2C829c2d4769742895.png)
+第二步、GPIO标签(User Label)定义分别改成`I2Cx_SCL`和`I2Cx_SDA`
 
-配置GPIO，上面设置完后会自动把那两个引脚配置为复用开漏输出模式，接着只需要把IO输出速度改成 `Very High` ，还有GPIO标签(User Label)定义分别改成`I2C3_SCL`和`I2C3_SDA`就行，如果是用的别的I2C也可以设置成别的值，代码对应处要修改一下。改完后点击生成代码。
+![](https://imgcdn.qlqq.me/2024/11/17/673977de5273f.png)
 
-![](https://tc2.zeruns.tech/2024/03/17/I2C_GPIO.png)
+第三步、OLED.h文件里
+1. 将 `#define OLED_USE_SW_I2C` 注释掉，将 `#define OLED_USE_HW_I2C` 取消注释
+2. 修改红框中对应的定义
 
-OLED.c文件里，将 `#define OLED_USE_SW_I2C` 注释掉，将 `#define OLED_USE_HW_I2C` 取消注释，如果你用的是别的引脚作为I2C引脚，并且定义了别的名字那就将代码里的 `I2C3_SCL` 和 `I2C3_SDA` 也改一下。
-
-![](https://tc2.zeruns.tech/2024/03/17/image-20240317003414458.png)
+![](https://imgcdn.qlqq.me/2024/11/17/673976f72b716.png)
 
 ### 软件I2C
 
-STM32CubeMX配置，设置两个引脚作为I2C的SCL和SDA信号线，修改IO口的 `User Lable` 分别为`I2C3_SCL`和`I2C3_SDA`，如果改成别的需要到代码里修改一下，IO模式设置为开漏输出，默认输出电平高电平，上拉输出，速度设置到最高，如下图所示。改为后点击生成代码。
+STM32CubeMX配置，设置两个引脚作为I2C的SCL和SDA信号线，修改IO口的 `User Lable` 分别为`I2x_SCL`和`I2x_SDA`，如果改成别的需要到代码里修改一下，IO模式设置为开漏输出，默认输出电平高电平，上拉输出，速度设置到最高，如下图所示。改为后点击生成代码。
 
 ![](https://tc2.zeruns.tech/2024/03/17/I2C.png)
 
-OLED.c文件里，将 `#define OLED_USE_HW_I2C` 注释掉，将 `#define OLED_USE_SW_I2C` 取消注释，如果你用的是别的引脚作为I2C引脚，并且定义了别的名字那就将代码里的 `I2C3_SCL` 和 `I2C3_SDA` 也改一下。
+OLED.h文件里，将 `#define OLED_USE_HW_I2C` 注释掉，将 `#define OLED_USE_SW_I2C` 取消注释，如果你用的是别的引脚作为I2C引脚，并且定义了别的名字那就将代码里的 `I2Cx_SCL` 和 `I2Cx_SDA` 也改一下。
 
-![](https://tc2.zeruns.tech/2024/03/17/image-20240317001749175_bebe48917fc7a6d9e041be6ae5177659.png)
+![](https://imgcdn.qlqq.me/2024/11/17/673976f72b716.png)
 
 ## 需要用的元件
 
