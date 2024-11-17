@@ -42,10 +42,10 @@ extern  I2C_HandleTypeDef       hi2c1;                  /* HAL库使用，指定
  * 需要在stm32cubemx代码初始化时将SCL和SDA引脚的"user lable"分别设置为对应的I2Cx_SCL和I2Cx_SDA。
  */
 
-#define OLED_SCL                I2C3_SCL_Pin            /* I2Cx_SCL引脚 */
-#define OLED_SDA                I2C3_SDA_Pin            /* I2Cx_SDA引脚 */
-#define OLED_SCL_GPIO_Port      I2C3_SCL_GPIO_Port      /* I2Cx_SCL端口 */
-#define OLED_SDA_GPIO_Port      I2C3_SDA_GPIO_Port      /* I2Cx_SDA端口 */
+#define OLED_SCL                I2C_SCL_Pin            /* I2Cx_SCL引脚 */
+#define OLED_SDA                I2C_SDA_Pin            /* I2Cx_SDA引脚 */
+#define OLED_SCL_GPIO_Port      I2C_SCL_GPIO_Port      /* I2Cx_SCL端口 */
+#define OLED_SDA_GPIO_Port      I2C_SDA_GPIO_Port      /* I2Cx_SDA端口 */
 
 /*******************移植需要修改的宏定义******************/
 
@@ -63,7 +63,7 @@ extern  I2C_HandleTypeDef       hi2c1;                  /* HAL库使用，指定
  * 下面数值为170MHz主频要延时的值，如果你的主频不一样可以修改一下
  * 100MHz以内的主频改成0就行
  */
-#define Delay_time 3
+#define Delay_time 0
 
 /***************************************以下为函数声明*******************************************/
 
@@ -81,7 +81,7 @@ void OLED_Reverse(void);
 void OLED_ReverseArea(uint8_t X, uint8_t Y, uint8_t Width, uint8_t Height);
 
 /*显示函数*/
-void OLED_ShowChar(uint8_t X, uint8_t Y, char Char, uint8_t FontSize);
+void OLED_ShowChar(int16_t X, int16_t Y, char Char, uint8_t FontSize);
 void OLED_ShowString(uint8_t X, uint8_t Y, char *String, uint8_t FontSize);
 void OLED_ShowNum(uint8_t X, uint8_t Y, uint32_t Number, uint8_t Length, uint8_t FontSize);
 void OLED_ShowSignedNum(uint8_t X, uint8_t Y, int32_t Number, uint8_t Length, uint8_t FontSize);
