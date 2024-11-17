@@ -4,7 +4,9 @@
 
 **This driver is more complete, it can realize content display of English, integer, floating point, Chinese characters, images, binary numbers, hexadecimal numbers, etc. It can draw points, straight lines, rectangles, circles, ellipses, triangles, etc., and support multiple fonts, almost equivalent to a simple version of the [Graphics Library](https://blog.zeruns.tech/tag/图形库/).**
 
-The program is based on the secondary modification of the code of Jiangxie Technology, the original program is based on STM32F103, and only supports software I2C, I modified to support hardware I2C, you can also modify the macro definition to change to use software I2C.
+The program is based on [zeruns](https://github.com/zeruns/STM32G4-OLED-SSD1306-I2C-HAL) three times modified, the original version based on Jiangxie Technology v1.1 version of the code, I modified and updated to Jiangxie Technology v2.0 version of 
+
+**the code Test hardware for the STM32F103C8T6 Core Board**
 
 Test hardware for the NUCLEO-G474RE development board
 
