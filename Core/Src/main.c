@@ -93,8 +93,11 @@ int main(void)
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
+  /*在(0, 0)位置显示字符'A'，字体大小为8*16点阵*/
+  OLED_ShowChar(0, 0, 'A', OLED_8X16);
+
   /*在(16, 0)位置显示字符串"Hello World!"，字体大小为8*16点阵*/
-  OLED_ShowString(0, 0, "blog.zeruns.tech", OLED_8X16);
+  OLED_ShowString(16, 0, "Hello World!", OLED_8X16);
 
   /*在(0, 18)位置显示字符'A'，字体大小为6*8点阵*/
   OLED_ShowChar(0, 18, 'A', OLED_6X8);
@@ -117,8 +120,8 @@ int main(void)
   /*在(60, 38)位置显示浮点数字123.45，整数部分长度为3，小数部分长度为2，字体大小为6*8点阵*/
   OLED_ShowFloatNum(60, 38, 123.45, 3, 2, OLED_6X8);
 
-  /*在(0, 48)位置显示汉字串"你好，世界。"，字体大小为固定的16*16点阵*/
-  OLED_ShowChinese(0, 48, "你好，世界。");
+  /*在(0, 48)位置显示英文和汉字串"Hello,世界。"，支持中英文混写*/
+  OLED_ShowString(0, 48, "Hello,世界。", OLED_8X16);
 
   /*在(96, 48)位置显示图像，宽16像素，高16像素，图像数据为Diode数组*/
   OLED_ShowImage(96, 48, 16, 16, Diode);
@@ -128,10 +131,9 @@ int main(void)
 
   /*调用OLED_Update函数，将OLED显存数组的内容更新到OLED硬件进行显示*/
   OLED_Update();
-  
-  HAL_GPIO_TogglePin(LED2_GPIO_Port, LED2_Pin); // LED电平翻转
+
   /*延时3000ms，观察现象*/
-  HAL_Delay(3000);
+  Delay_ms(3000);
 
   /*清空OLED显存数组*/
   OLED_Clear();
@@ -142,13 +144,13 @@ int main(void)
   /*获取(5, 8)位置的点*/
   if (OLED_GetPoint(5, 8))
   {
-    /*如果指定点点亮，则在(10, 4)位置显示字符串"YES"，字体大小为6*8点阵*/
-    OLED_ShowString(10, 4, "YES", OLED_6X8);
+      /*如果指定点点亮，则在(10, 4)位置显示字符串"YES"，字体大小为6*8点阵*/
+      OLED_ShowString(10, 4, "YES", OLED_6X8);
   }
   else
   {
-    /*如果指定点未点亮，则在(10, 4)位置显示字符串"NO "，字体大小为6*8点阵*/
-    OLED_ShowString(10, 4, "NO ", OLED_6X8);
+      /*如果指定点未点亮，则在(10, 4)位置显示字符串"NO "，字体大小为6*8点阵*/
+      OLED_ShowString(10, 4, "NO ", OLED_6X8);
   }
 
   /*在(40, 0)和(127, 15)位置之间画直线*/
@@ -177,7 +179,7 @@ int main(void)
 
   /*在(82, 27)位置画椭圆，横向半轴12像素，纵向半轴8像素，未填充*/
   OLED_DrawEllipse(82, 27, 12, 8, OLED_UNFILLED);
-  // https://blog.zeruns.tech
+
   /*在(82, 47)位置画椭圆，横向半轴12像素，纵向半轴8像素，填充*/
   OLED_DrawEllipse(82, 47, 12, 8, OLED_FILLED);
 
@@ -190,41 +192,37 @@ int main(void)
   /*调用OLED_Update函数，将OLED显存数组的内容更新到OLED硬件进行显示*/
   OLED_Update();
 
-  HAL_GPIO_TogglePin(LED2_GPIO_Port, LED2_Pin); // LED电平翻转
-
-  /*延时1500ms，观察现象*/
-  HAL_Delay(1500);
+  /*延时3000ms，观察现象*/
+  Delay_ms(3000);
 
   while (1)
   {
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
-    for (uint8_t i = 0; i < 4; i++)
-    {
-      HAL_GPIO_TogglePin(LED2_GPIO_Port, LED2_Pin); // LED电平翻转
-      /*将OLED显存数组部分数据取反，从(0, i * 16)位置开始，宽128像素，高16像素*/
-      OLED_ReverseArea(0, i * 16, 128, 16);
+    for (uint8_t i = 0; i < 4; i ++)
+      {
+        /*将OLED显存数组部分数据取反，从(0, i * 16)位置开始，宽128像素，高16像素*/
+        OLED_ReverseArea(0, i * 16, 128, 16);
 
+        /*调用OLED_Update函数，将OLED显存数组的内容更新到OLED硬件进行显示*/
+        OLED_Update();
+
+        /*延时1000ms，观察现象*/
+        Delay_ms(1000);
+
+        /*把取反的内容翻转回来*/
+        OLED_ReverseArea(0, i * 16, 128, 16);
+      }
+  
+      /*将OLED显存数组全部数据取反*/
+      OLED_Reverse();
+  
       /*调用OLED_Update函数，将OLED显存数组的内容更新到OLED硬件进行显示*/
       OLED_Update();
-
+  
       /*延时1000ms，观察现象*/
-      HAL_Delay(1000);
-
-      /*把取反的内容翻转回来*/
-      OLED_ReverseArea(0, i * 16, 128, 16);
-    }
-    // https://blog.zeruns.tech
-    /*将OLED显存数组全部数据取反*/
-    OLED_Reverse();
-
-    /*调用OLED_Update函数，将OLED显存数组的内容更新到OLED硬件进行显示*/
-    OLED_Update();
-
-    HAL_GPIO_TogglePin(LED2_GPIO_Port, LED2_Pin); // LED电平翻转
-    /*延时1000ms，观察现象*/
-    HAL_Delay(1000);
+      Delay_ms(1000);
   }
   /* USER CODE END 3 */
 }
