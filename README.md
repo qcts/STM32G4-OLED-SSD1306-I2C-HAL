@@ -66,29 +66,27 @@ I2C通信时单片机GPIO口必须设置为开漏输出，否则可能会造成�
 
 第一步、STM32CubeMX配置I2C
 
-启用对应的I2C外设，速度模式设置为 `Fast Mode`，速度改成 1000，其他默认就行。
+启用对应的I2C外设，速度模式设置为 `Fast Mode`，其他默认就行。
 
-![](https://imgcdn.qlqq.me/2024/11/17/6739774d2b151.png)
+![](https://imgcdn.qlqq.me/2024/11/17/6739b7ef7c844.png)
 
-第二步、GPIO标签(User Label)定义分别改成`I2Cx_SCL`和`I2Cx_SDA`
+第二步、I2C的GPIO标签(User Label)定义分别改成`I2C_SCL`和`I2C_SDA`
 
-![](https://imgcdn.qlqq.me/2024/11/17/673977de5273f.png)
+![](https://imgcdn.qlqq.me/2024/11/17/6739b8d6536b0.png)
 
 第三步、OLED.h文件里
 1. 将 `#define OLED_USE_SW_I2C` 注释掉，将 `#define OLED_USE_HW_I2C` 取消注释
 2. 修改红框中对应的定义
 
-![](https://imgcdn.qlqq.me/2024/11/17/673976f72b716.png)
+![](https://imgcdn.qlqq.me/2024/11/17/6739b94455e9c.png)
 
 ### 软件I2C
 
-STM32CubeMX配置，设置两个引脚作为I2C的SCL和SDA信号线，修改IO口的 `User Lable` 分别为`I2x_SCL`和`I2x_SDA`，如果改成别的需要到代码里修改一下，IO模式设置为开漏输出，默认输出电平高电平，上拉输出，速度设置到最高，如下图所示。改为后点击生成代码。
-
-![](https://tc2.zeruns.tech/2024/03/17/I2C.png)
+STM32CubeMX配置，设置两个引脚作为I2C的SCL和SDA信号线，修改IO口的 `User Lable` 分别为`I2C_SCL`和`I2C_SDA``，IO模式设置为开漏输出，默认输出电平高电平，上拉输出，速度设置到最高，如下图所示。改为后点击生成代码。
 
 OLED.h文件里，将 `#define OLED_USE_HW_I2C` 注释掉，将 `#define OLED_USE_SW_I2C` 取消注释，如果你用的是别的引脚作为I2C引脚，并且定义了别的名字那就将代码里的 `I2Cx_SCL` 和 `I2Cx_SDA` 也改一下。
 
-![](https://imgcdn.qlqq.me/2024/11/17/673976f72b716.png)
+![](https://imgcdn.qlqq.me/2024/11/17/6739b94455e9c.png)
 
 ## 需要用的元件
 
