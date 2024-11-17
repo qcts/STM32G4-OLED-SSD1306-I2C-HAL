@@ -6,7 +6,7 @@
 
 该程序是基于江协科技的代码二次修改的，原版程序是基于STM32F103的，且只支持软件I2C，我修改后支持硬件I2C，也可以修改宏定义改成使用软件I2C。
 
-测试硬件为NUCLEO-G474RE开发板
+**测试硬件为STM32F103C8T6核心板**
 
 关于OLED的驱动原理，以及驱动程序的使用教程可以看江协科技的视频：[https://url.zeruns.tech/L7j6y](https://www.bilibili.com/video/BV1EN41177Pc)
 
