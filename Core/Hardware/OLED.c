@@ -341,7 +341,7 @@ void OLED_SetCursor(uint8_t Page, uint8_t X)
     /*因为1.3寸的OLED驱动芯片（SH1106）有132列*/
     /*屏幕的起始列接在了第2列，而不是第0列*/
     /*所以需要将X加2，才能正常显示*/
-    X += 2;
+    //X += 2;
 
     /*通过指令设置页地址和列地址*/
     OLED_WriteCommand(0xB0 | Page);              /* 设置页位置 */
