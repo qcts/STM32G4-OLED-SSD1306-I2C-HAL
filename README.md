@@ -84,7 +84,7 @@ I2C通信时单片机GPIO口必须设置为开漏输出，否则可能会造成�
 
 STM32CubeMX配置，设置两个引脚作为I2C的SCL和SDA信号线，修改IO口的 `User Lable` 分别为`I2C_SCL`和`I2C_SDA``，IO模式设置为开漏输出，默认输出电平高电平，上拉输出，速度设置到最高，如下图所示。改为后点击生成代码。
 
-OLED.h文件里，将 `#define OLED_USE_HW_I2C` 注释掉，将 `#define OLED_USE_SW_I2C` 取消注释，如果你用的是别的引脚作为I2C引脚，并且定义了别的名字那就将代码里的 `I2Cx_SCL` 和 `I2Cx_SDA` 也改一下。
+OLED.h文件里，将 `#define OLED_USE_HW_I2C` 注释掉，将 `#define OLED_USE_SW_I2C` 取消注释，如果你用的是别的引脚作为I2C引脚，并且定义了别的名字那就将代码里的 `I2C_SCL` 和 `I2C_SDA` 也改一下。
 
 ![](https://imgcdn.qlqq.me/2024/11/17/6739b94455e9c.png)
 
