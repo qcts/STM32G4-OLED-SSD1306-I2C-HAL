@@ -26,6 +26,13 @@
  * B站主页：   https://space.bilibili.com/8320520
 */
 
+/*
+ * 本程序由qlqqs三次修改
+ * 修改内容：   将宏定义移到OLED.h；修改了一些注释；使用Astyle格式化了一遍（四行缩进）
+ * 修改日期：   2024.11.17
+ * 博客：       https://blog.qlqqs.com
+*/
+
 #include "OLED.h"
 
 /**
