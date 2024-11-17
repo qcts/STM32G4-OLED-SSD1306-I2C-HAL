@@ -42,10 +42,10 @@ extern  I2C_HandleTypeDef       hi2c1;                  /* HAL库使用，指定
  * 需要在stm32cubemx代码初始化时将SCL和SDA引脚的"user lable"分别设置为对应的I2Cx_SCL和I2Cx_SDA。
  */
 
-#define OLED_SCL                I2C1_SCL_Pin            /* I2Cx_SCL引脚 */
-#define OLED_SDA                I2C1_SDA_Pin            /* I2Cx_SDA引脚 */
-#define OLED_SCL_GPIO_Port      I2C1_SCL_GPIO_Port      /* I2Cx_SCL端口 */
-#define OLED_SDA_GPIO_Port      I2C1_SDA_GPIO_Port      /* I2Cx_SDA端口 */
+#define OLED_SCL                I2C3_SCL_Pin            /* I2Cx_SCL引脚 */
+#define OLED_SDA                I2C3_SDA_Pin            /* I2Cx_SDA引脚 */
+#define OLED_SCL_GPIO_Port      I2C3_SCL_GPIO_Port      /* I2Cx_SCL端口 */
+#define OLED_SDA_GPIO_Port      I2C3_SDA_GPIO_Port      /* I2Cx_SDA端口 */
 
 /*******************移植需要修改的宏定义******************/
 
