@@ -65,31 +65,32 @@ All project files are encoded in UTF-8, if you open them, you need to change the
 
 ### Hardware I2C
 
-STM32CubeMX configuration, find the pin of the I2C peripheral you want to use, and set the pin function to SCL and SDA, the following picture shows the SCL of I2C3.
+Step 1 - Configure I2C in STM32CubeMX
 
-![](https://tc2.zeruns.tech/2024/03/17/image-20240317002450658.png)
+Enable the corresponding I2C peripheral, set the speed mode to `Fast Mode`, leave other settings as default.
 
-Next, configure the I2C peripheral, enable the corresponding I2C peripheral, set the speed mode to `Fast Mode Plus`, change the speed to 1000, and other defaults will work.
+![](https://imgcdn.qlqq.me/2024/11/17/6739b7ef7c844.png)
 
-![](https://tc2.zeruns.tech/2024/03/17/I2C829c2d4769742895.png)
+Step 2 - Change the I2C GPIO User Labels to `I2C_SCL` and `I2C_SDA` respectively
 
-Configure GPIO, after the above setting, it will automatically configure those two pins as multiplexed open-drain output mode, then you only need to change the IO output speed to `Very High`, and the definition of GPIO label (User Label) to `I2C3_SCL` and `I2C3_SDA` respectively, on the line, if you are using other I2C, you can also set it to other values, the code should be modified at the corresponding place. If you are using other I2C, you can set it to other values, and change the code in the corresponding place. After changing the code, click Generate Code.
+![](https://imgcdn.qlqq.me/2024/11/17/6739b8d6536b0.png)
 
-![](https://tc2.zeruns.tech/2024/03/17/I2C_GPIO.png)
+Step 3 - In OLED.h file
+1. Comment out `#define OLED_USE_SW_I2C`, uncomment `#define OLED_USE_HW_I2C`
+2. Modify the definitions in the red box accordingly
 
-In the OLED.c file, comment out `#define OLED_USE_SW_I2C`, uncomment `#define OLED_USE_HW_I2C`, and change `I2C3_SCL` and `I2C3_SDA` in the code if you are using other I2C pins and have defined other names.
-
-![](https://tc2.zeruns.tech/2024/03/17/image-20240317003414458.png)
+![](https://imgcdn.qlqq.me/2024/11/17/6739b94455e9c.png)
 
 ### Software I2C
 
-STM32CubeMX configuration, set two pins as SCL and SDA signal lines of I2C, modify the `User Lable` of IO port to `I2C3_SCL` and `I2C3_SDA` respectively, if you change it to something else, you need to change it in the code, the IO mode is set to open-drain output, the default output level is high, the output level of pull-up is high and the speed is set to the highest. The following figure shows. Click Generate Code after change.
+STM32CubeMX configuration: Set two pins as I2C SCL and SDA signal lines, modify the IO port User Labels to `I2C_SCL` and `I2C_SDA` respectively. Set IO mode to open-drain output, default output level high, pull-up output, and set speed to maximum as shown below. Click generate code after changes.
 
-![](https://tc2.zeruns.tech/2024/03/17/I2C.png)
+![](https://imgcdn.qlqq.me/2024/11/17/6739bb8a76c5e.png)
 
-In the OLED.c file, comment out `#define OLED_USE_HW_I2C`, uncomment `#define OLED_USE_SW_I2C`, and change `I2C3_SCL` and `I2C3_SDA` in the code if you use other pins as I2C pins and define other names.
+In OLED.h file, comment out `#define OLED_USE_HW_I2C`, uncomment `#define OLED_USE_SW_I2C`. If you're using different pins for I2C and defined different names, also change `I2C_SCL` and `I2C_SDA` in the code accordingly.
 
-![](https://tc2.zeruns.tech/2024/03/17/image-20240317001749175_bebe48917fc7a6d9e041be6ae5177659.png)
+![](https://imgcdn.qlqq.me/2024/11/17/6739b94455e9c.png)
+
 
 ## 需要用的元件
 
