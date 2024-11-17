@@ -142,16 +142,16 @@ void OLED_GPIO_Init(void)
             ;
     }
 #ifdef OLED_USE_SW_I2C
-    __HAL_RCC_GPIOC_CLK_ENABLE();		// 使能GPIOC时钟
-    __HAL_RCC_GPIOA_CLK_ENABLE();       // 使能GPIOA时钟
-    GPIO_InitTypeDef GPIO_InitStruct = {0};              // 定义结构体配置GPIO
+    __HAL_RCC_GPIOC_CLK_ENABLE();                       // 使能GPIOC时钟
+    __HAL_RCC_GPIOA_CLK_ENABLE();                       // 使能GPIOA时钟
+    GPIO_InitTypeDef GPIO_InitStruct = {0};             // 定义结构体配置GPIO
     GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_OD;	        // 设置GPIO模式为开漏输出模式
     GPIO_InitStruct.Pull = GPIO_PULLUP;                 // 内部上拉电阻
-    GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_VERY_HIGH;  // 设置GPIO速度为高速
-    GPIO_InitStruct.Pin = I2C3_SDA_Pin;                 // 设置引脚
+    GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_HIGH;       // 设置GPIO速度为高速
+    GPIO_InitStruct.Pin = I2C_SDA_Pin;                  // 设置引脚
     HAL_GPIO_Init(I2C3_SDA_GPIO_Port, &GPIO_InitStruct);// 初始化GPIO
 
-    GPIO_InitStruct.Pin = I2C3_SCL_Pin;
+    GPIO_InitStruct.Pin = I2C_SCL_Pin;
     HAL_GPIO_Init(I2C3_SCL_GPIO_Port, &GPIO_InitStruct);
 
     /*释放SCL和SDA*/
@@ -172,10 +172,10 @@ void OLED_GPIO_Init(void)
 void OLED_I2C_Start(void)
 {
 #ifdef OLED_USE_SW_I2C
-    OLED_W_SDA(1);		//释放SDA，确保SDA为高电平
-    OLED_W_SCL(1);		//释放SCL，确保SCL为高电平
-    OLED_W_SDA(0);		//在SCL高电平期间，拉低SDA，产生起始信号
-    OLED_W_SCL(0);		//起始后把SCL也拉低，即为了占用总线，也为了方便总线时序的拼接
+    OLED_W_SDA(1);      //释放SDA，确保SDA为高电平
+    OLED_W_SCL(1);      //释放SCL，确保SCL为高电平
+    OLED_W_SDA(0);      //在SCL高电平期间，拉低SDA，产生起始信号
+    OLED_W_SCL(0);      //起始后把SCL也拉低，即为了占用总线，也为了方便总线时序的拼接
 #endif
 }
 
@@ -187,9 +187,9 @@ void OLED_I2C_Start(void)
 void OLED_I2C_Stop(void)
 {
 #ifdef OLED_USE_SW_I2C
-    OLED_W_SDA(0);		//拉低SDA，确保SDA为低电平
-    OLED_W_SCL(1);		//释放SCL，使SCL呈现高电平
-    OLED_W_SDA(1);		//在SCL高电平期间，释放SDA，产生终止信号
+    OLED_W_SDA(0);      //拉低SDA，确保SDA为低电平
+    OLED_W_SCL(1);      //释放SCL，使SCL呈现高电平
+    OLED_W_SDA(1);      //在SCL高电平期间，释放SDA，产生终止信号
 #endif
 }
 
@@ -208,10 +208,10 @@ void OLED_I2C_SendByte(uint8_t Byte)
         /*使用掩码的方式取出Byte的指定一位数据并写入到SDA线*/
         /*两个!的作用是，让所有非零的值变为1*/
         OLED_W_SDA(!!(Byte & (0x80 >> i)));
-        OLED_W_SCL(1);	//释放SCL，从机在SCL高电平期间读取SDA
-        OLED_W_SCL(0);	//拉低SCL，主机开始发送下一位数据
+        OLED_W_SCL(1);  //释放SCL，从机在SCL高电平期间读取SDA
+        OLED_W_SCL(0);  //拉低SCL，主机开始发送下一位数据
     }
-    OLED_W_SCL(1);		//额外的一个时钟，不处理应答信号
+    OLED_W_SCL(1);      //额外的一个时钟，不处理应答信号
     OLED_W_SCL(0);
 #endif
 }
@@ -224,11 +224,11 @@ void OLED_I2C_SendByte(uint8_t Byte)
 void OLED_WriteCommand(uint8_t Command)
 {
 #ifdef OLED_USE_SW_I2C
-    OLED_I2C_Start();           // I2C起始
-    OLED_I2C_SendByte(0x78);		//发送OLED的I2C从机地址
-    OLED_I2C_SendByte(0x00);	//控制字节，给0x00，表示即将写命令
-    OLED_I2C_SendByte(Command); // 写入指定的命令
-    OLED_I2C_Stop();            // I2C终止
+    OLED_I2C_Start();               // I2C起始
+    OLED_I2C_SendByte(0x78);        //发送OLED的I2C从机地址
+    OLED_I2C_SendByte(0x00);        //控制字节，给0x00，表示即将写命令
+    OLED_I2C_SendByte(Command);     // 写入指定的命令
+    OLED_I2C_Stop();                // I2C终止
 #elif defined(OLED_USE_HW_I2C)
     uint8_t TxData[2] = {0x00, Command};
     HAL_I2C_Master_Transmit(&OLED_I2C, OLED_ADDRESS, (uint8_t*)TxData, 2, OLED_I2C_TIMEOUT);
@@ -245,18 +245,18 @@ void OLED_WriteData(uint8_t *Data, uint8_t Count)
 {
     uint8_t i;
 #ifdef OLED_USE_SW_I2C
-    OLED_I2C_Start();        // I2C起始
-    OLED_I2C_SendByte(0x78);		//发送OLED的I2C从机地址
+    OLED_I2C_Start();                   // I2C起始
+    OLED_I2C_SendByte(0x78);            //发送OLED的I2C从机地址
 
-    OLED_I2C_SendByte(0x40); // 控制字节，给0x40，表示即将写数据
+    OLED_I2C_SendByte(0x40);            // 控制字节，给0x40，表示即将写数据
     /*循环Count次，进行连续的数据写入*/
     for (i = 0; i < Count; i++) {
-        OLED_I2C_SendByte(Data[i]); // 依次发送Data的每一个数据
+        OLED_I2C_SendByte(Data[i]);     // 依次发送Data的每一个数据
     }
     OLED_I2C_Stop(); // I2C终止
 #elif defined(OLED_USE_HW_I2C)
-    uint8_t TxData[Count + 1]; // 分配一个新的数组，大小是Count + 1
-    TxData[0] = 0x40; // 起始字节
+    uint8_t TxData[Count + 1];          // 分配一个新的数组，大小是Count + 1
+    TxData[0] = 0x40;                   // 起始字节
     // 将Data指向的数据复制到TxData数组的剩余部分
     for (i = 0; i < Count; i++) {
         TxData[i + 1] = Data[i];
@@ -318,8 +318,8 @@ void OLED_Init(void)
 
     OLED_WriteCommand(0xAF); // 开启显示
 
-    OLED_Clear();  // 清空显存数组
-    OLED_Update(); // 更新显示，清屏，防止初始化后未显示内容时花屏
+    OLED_Clear();            // 清空显存数组
+    OLED_Update();           // 更新显示，清屏，防止初始化后未显示内容时花屏
 }
 
 /**
