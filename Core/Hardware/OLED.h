@@ -30,12 +30,12 @@
  * 如果要用软件I2C就将硬件I2C那行的宏定义注释掉，将软件I2C那行的注释取消。
  * 不能同时两个都同时取消注释！
  */
-#define OLED_USE_HW_I2C                                 /* 硬件I2C */
-//#define OLED_USE_SW_I2C                               /* 软件I2C */
+#define OLED_USE_HW_I2C                                /* 硬件I2C */
+//#define OLED_USE_SW_I2C                              /* 软件I2C */
 
 #ifdef OLED_USE_HW_I2C
-#define OLED_I2C                hi2c1                   /* 定义OLED屏使用hi2cx接口 */
-extern  I2C_HandleTypeDef       hi2c1;                  /* HAL库使用，指定硬件IIC接口 */
+#define OLED_I2C                hi2c1                  /* 定义OLED屏使用hi2cx接口 */
+extern  I2C_HandleTypeDef       hi2c1;                 /* HAL库使用，指定硬件IIC接口 */
 #endif
 
 /* STM32F103C8T6芯片的硬件I2C1: PB6 -- SCL; PB7 -- SDA
