@@ -5,8 +5,8 @@
 
 /*字符集定义*/
 /*以下两个宏定义只可解除其中一个的注释*/
-#define OLED_CHARSET_UTF8                /* 定义字符集为UTF8 */
-//#define OLED_CHARSET_GB2312            /* 定义字符集为GB2312 */
+#define OLED_CHARSET_UTF8               /* 定义字符集为UTF8 */
+//#define OLED_CHARSET_GB2312           /* 定义字符集为GB2312 */
 
 /*字模基本单元*/
 typedef struct
