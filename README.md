@@ -62,7 +62,7 @@ I2C通信时单片机GPIO口必须设置为开漏输出，否则可能会造成�
 
 工程文件全部使用UTF-8编码，如果打开显示乱码需要修改编辑器编码为UTF-8。
 
-如需使用GB2312，请自行将[OLED_GB2312](https://github.com/qlqqs/STM32G4-OLED-SSD1306-I2C-HAL/tree/master/Core/Hardware/OLED_GB2312)内的文件替换到[Haedware](https://github.com/qlqqs/STM32G4-OLED-SSD1306-I2C-HAL/tree/master/Core/Hardware)
+如需使用GB2312，请自行将[OLED_GB2312](https://github.com/qlqqs/STM32G4-OLED-SSD1306-I2C-HAL/tree/master/Core/Hardware/OLED_GB2312)内的文件替换到[Hardware](https://github.com/qlqqs/STM32G4-OLED-SSD1306-I2C-HAL/tree/master/Core/Hardware)
 
 ### 硬件I2C
 
