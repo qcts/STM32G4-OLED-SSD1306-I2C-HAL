@@ -30,6 +30,10 @@
  * 如果要用软件I2C就将硬件I2C那行的宏定义注释掉，将软件I2C那行的注释取消。
  * 不能同时两个都同时取消注释！
  */
+
+//#define OLED_13                                      /* 1.3寸OLED */
+#define OLED_96                                        /* 0.96寸OLED */
+
 #define OLED_USE_HW_I2C                                /* 硬件I2C */
 //#define OLED_USE_SW_I2C                              /* 软件I2C */
 
