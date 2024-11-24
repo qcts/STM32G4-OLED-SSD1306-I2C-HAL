@@ -1,10 +1,10 @@
 # 基于STM32的OLED屏驱动程序，支持软件或硬件I2C（HAL库）
 
+## 该程序是基于[zeruns](https://github.com/zeruns/STM32G4-OLED-SSD1306-I2C-HAL)三次修改的，原版基于江协科技v1.1版本代码，我修改后更新为江协科技v2.0版本代码
+
 **基于[STM32](https://blog.zeruns.tech/tag/stm32/)G474的0.96寸OLED(SSD1306)显示屏驱动程序（4针脚[I2C](https://blog.zeruns.tech/tag/I2C/)接口），支持硬件IIC/软件IIC，HAL库版。**
 
 **这款驱动程序比较完善，可以实现 英文、整数、浮点数、汉字、图像、二进制数、十六进制数 等内容显示，可以画点、直线、矩形、圆、椭圆、三角形等，支持多种字体，差不多相当于一个简易版[图形库](https://blog.zeruns.tech/tag/图形库/)了。**
-
-该程序是基于[zeruns](https://github.com/zeruns/STM32G4-OLED-SSD1306-I2C-HAL)三次修改的，原版基于江协科技v1.1版本代码，我修改后更新为江协科技v2.0版本代码
 
 **测试硬件为STM32F103C8T6核心板**
 
